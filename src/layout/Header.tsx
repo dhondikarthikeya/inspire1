@@ -15,18 +15,45 @@ const MENU = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
+
+  const lastYRef = useRef(0);
+  const tickingRef = useRef(false);
+
+  // iOS-safe scroll lock
+  const scrollYRef = useRef(0);
 
   // Close drawer on route change
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
-  // Lock scroll when menu open
+  // Lock background scroll when menu open (works on mobile + iOS)
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => (document.body.style.overflow = "");
+    if (!open) return;
+
+    scrollYRef.current = window.scrollY || 0;
+
+    const body = document.body;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollYRef.current}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+
+    return () => {
+      const y = scrollYRef.current;
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      body.style.overflow = "";
+      window.scrollTo(0, y);
+    };
   }, [open]);
 
   // Close with ESC
@@ -43,6 +70,40 @@ export default function Header() {
     if (open) closeBtnRef.current?.focus();
   }, [open]);
 
+  // Hide header on scroll down (not immediately), show on scroll up
+  // ✅ IMPORTANT: do NOT hide header while menu is open
+  useEffect(() => {
+    lastYRef.current = window.scrollY || 0;
+
+    const HIDE_OFFSET = 120;
+    const DELTA_TRIGGER = 12;
+
+    const onScroll = () => {
+      if (open) return; // keep header visible when drawer is open
+      if (tickingRef.current) return;
+      tickingRef.current = true;
+
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY || 0;
+        const lastY = lastYRef.current;
+        const delta = y - lastY;
+
+        if (y < HIDE_OFFSET) {
+          setHideHeader(false);
+        } else if (Math.abs(delta) > DELTA_TRIGGER) {
+          if (delta > 0) setHideHeader(true);
+          else setHideHeader(false);
+        }
+
+        lastYRef.current = y;
+        tickingRef.current = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
   return (
     <>
       {/* FIXED HEADER */}
@@ -56,6 +117,8 @@ export default function Header() {
           background: "rgba(255,255,255,.92)",
           backdropFilter: "blur(12px)",
           borderBottom: "1px solid rgba(0,0,0,.08)",
+          transform: hideHeader ? "translateY(-110%)" : "translateY(0)",
+          transition: "transform .22s ease",
         }}
       >
         {/* TOP BAR */}
@@ -70,7 +133,7 @@ export default function Header() {
             gap: 12,
           }}
         >
-          {/* LOGO (public image path, no import needed) */}
+          {/* LOGO */}
           <Link
             to="/"
             onClick={() => setOpen(false)}
@@ -91,19 +154,10 @@ export default function Header() {
               />
             </div>
 
-            <div style={{ minWidth: 0 }}>
-              <div
-                style={{
-                  fontWeight: 800,
-                  lineHeight: 1.1,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {SITE.name}
-              </div>
-              <div style={{ fontSize: 12, opacity: 0.7 }}>{SITE.location}</div>
+            {/* Name + location */}
+            <div className="brandWrap">
+              <div className="brandText">{SITE.name}</div>
+              <div className="brandLocation">Armoor, Nizamabad</div>
             </div>
           </Link>
 
@@ -115,26 +169,22 @@ export default function Header() {
                 to={item.to}
                 end={item.end}
                 onClick={() => setOpen(false)}
-                style={({ isActive }) => ({
-                  padding: "9px 14px",
-                  borderRadius: 999,
+                className={({ isActive }) =>
+                  `desktopLink ${isActive ? "active" : ""}`
+                }
+                style={{
+                  padding: "9px 6px",
                   textDecoration: "none",
-                  fontWeight: 650,
-                  fontSize: 14,
-                  color: isActive ? "#ff8c00" : "#111",
-                  background: isActive ? "rgba(255,140,0,.10)" : "transparent",
-                  border: isActive
-                    ? "1px solid rgba(255,140,0,.25)"
-                    : "1px solid transparent",
-                  transition: "all .18s ease",
-                })}
+                  fontWeight: 450,
+                  fontSize: 16,
+                }}
               >
                 {item.label}
               </NavLink>
             ))}
           </nav>
 
-          {/* MENU BUTTON (hidden on desktop via CSS) */}
+          {/* MENU BUTTON */}
           <button
             className="menuBtn"
             onClick={() => setOpen(true)}
@@ -175,7 +225,7 @@ export default function Header() {
                 </div>
                 <div className="drawerTitleWrap">
                   <div className="drawerTitle">{SITE.name}</div>
-                  <div className="drawerSubtitle">{SITE.location}</div>
+                  <div className="drawerSubtitle">Armoor, Nizamabad</div>
                 </div>
               </div>
 
@@ -232,16 +282,78 @@ export default function Header() {
 
         {/* STYLES */}
         <style>{`
-          .desktopNav { display: flex; gap: 8px; }
+          .desktopNav { display: flex; gap: 14px; align-items: center; }
+
+          .brandWrap{
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+          }
+          .brandText{
+            font-weight: 550;
+            font-size: 24px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #111;
+            min-width: 0;
+          }
+          .brandLocation{
+            font-weight: 500;
+            font-size: 14px;
+            color: rgba(0,0,0,.65);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          @media (max-width: 1024px){
+            .brandText{
+              font-size: 18px;
+              white-space: normal;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              max-width: 220px;
+            }
+            .brandLocation{
+              font-size: 13px;
+              max-width: 220px;
+            }
+          }
+
+          /* Desktop links: orange text on hover + BLACK underline */
+          .desktopLink {
+            color: #111;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 2px;
+            transition: color .18s ease;
+          }
+          .desktopLink::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background: #111;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .18s ease;
+          }
+          .desktopLink:hover { color: ##2563eb; }
+          .desktopLink:hover::after { transform: scaleX(1); }
+          .desktopLink.active { color: #2563eb; }
+          .desktopLink.active::after { transform: scaleX(1); }
 
           /* Logo image containers */
           .logoWrap {
             width: 85px;
             height: 75px;
-            // border-radius: 12px;
-            background: #fff;
-            // border: 1px solid rgba(0,0,0,.08);
-            // box-shadow: 0 10px 22px rgba(0,0,0,.06);
+            // background: #fff;
             display: grid;
             place-items: center;
             overflow: hidden;
@@ -250,7 +362,7 @@ export default function Header() {
           .logoImg {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* use contain if you want full logo visible */
+            object-fit: cover;
           }
 
           /* Menu button: hidden by default (desktop) */
@@ -280,6 +392,9 @@ export default function Header() {
             display: block;
           }
 
+          /* ✅ IMPORTANT FIX:
+             overlay + drawer are FIXED so background doesn't scroll,
+             and drawer stays pinned on mobile/tablet */
           .overlay {
             position: fixed;
             inset: 0;
@@ -288,18 +403,19 @@ export default function Header() {
             pointer-events: none;
             transition: opacity .18s ease;
             z-index: 999;
+            overscroll-behavior: contain;
+            touch-action: none;
           }
           .overlay.show {
             opacity: 1;
             pointer-events: auto;
           }
 
-          /* Full-height drawer */
           .drawer {
-            position: absolute;
+            position: fixed;     /* ✅ was absolute */
             top: 0;
             right: 0;
-            height: 100vh;
+            height: 100dvh;      /* better on mobile */
             width: min(360px, 92vw);
             background: #fff;
             box-shadow: -18px 0 50px rgba(0,0,0,.18);
@@ -310,6 +426,8 @@ export default function Header() {
             flex-direction: column;
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
+            overscroll-behavior: contain;
+            touch-action: pan-y;
           }
           .drawer.open {
             transform: translateX(0);
@@ -335,10 +453,7 @@ export default function Header() {
           .drawerLogoWrap {
             width: 50px;
             height: 50px;
-            // border-radius: px;
             background: #fff;
-            // border: 1px solid rgba(0,0,0,.08);
-            // box-shadow: 0 10px 22px rgba(0,0,0,.06);
             display: grid;
             place-items: center;
             overflow: hidden;
@@ -362,6 +477,7 @@ export default function Header() {
           .drawerSubtitle {
             font-size: 12px;
             color: rgba(15, 23, 42, .65);
+            margin-top: 2px;
           }
 
           .iconBtn {
@@ -382,36 +498,41 @@ export default function Header() {
 
           .drawerNav {
             padding: 12px 12px 0 12px;
-            overflow: auto;
+            overflow: auto;                 /* ✅ only this scrolls */
             flex: 1 1 auto;
+            -webkit-overflow-scrolling: touch;
           }
 
+          /* Mobile drawer items: orange text on hover + BLACK underline (no box) */
           .drawerItem {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            padding: 14px 14px;
-            border-radius: 5px;
+            padding: 14px 14px 12px 14px;
             text-decoration: none;
             font-weight: 550;
-            color: #0f172a;
-            border: 1px solid rgba(15, 23, 42, .08);
-            background: #fff;
+            color: #111;
             margin-bottom: 10px;
-            transition: transform .15s ease, background .15s ease, border-color .15s ease;
+            position: relative;
+            transition: color .18s ease;
           }
-
-          .drawerItem:hover {
-            background: rgba(15, 23, 42, .03);
-            transform: translateY(-1px);
+          .drawerItem::after {
+            content: "";
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 6px;
+            height: 2px;
+            background: #111;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .18s ease;
           }
-
-          .drawerItem.active {
-            color: #ff8c00;
-            background: rgba(255,140,0,.10);
-            border-color: rgba(255,140,0,.28);
-          }
+          .drawerItem:hover { color: #2563eb; }
+          .drawerItem:hover::after { transform: scaleX(1); }
+          .drawerItem.active { color: #2563eb; }
+          .drawerItem.active::after { transform: scaleX(1); }
 
           .drawerItemLabel { font-size: 15px; }
           .chev { opacity: .55; font-size: 18px; }
@@ -434,7 +555,7 @@ export default function Header() {
             letter-spacing: .2px;
           }
           .ctaPrimary {
-            background: linear-gradient(135deg,#ff8c00,#ffb347);
+            background: linear-gradient(135deg,#2563eb,#ffb347);
             color: #fff;
             box-shadow: 0 12px 26px rgba(255,140,0,.22);
           }

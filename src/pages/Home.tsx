@@ -7,7 +7,7 @@ import "./home.css";
 type EnquiryForm = {
   name: string;
   phone: string;
-  course: "BHM" | "Diploma" | "Certificate";
+  course: "Advanced Diploma In HotelManagement" | "Diploma In Hotel Management" | "Post-Graduation Diploma In Hotel Management" |"Diploma In F&B Service & Housekeeping"|"Diploma In F&B Service"|"Diploma In Front Office"|"Diploma In Housekeeping";
 };
 
 type FieldErrors = Partial<Record<keyof EnquiryForm, string>>;
@@ -100,9 +100,13 @@ export default function Home() {
 
   const slides: Slide[] = useMemo(
     () => [
-      { src: "/images/slider1.jpeg", alt: "College campus view", caption: "Campus & Learning Environment" },
-      { src: "/images/slider2.jpeg", alt: "Training kitchen lab", caption: "Practical Training Labs" },
-      { src: "/images/slider3.jpeg", alt: "Training kitchen lab", caption: "Practical Training Labs" },
+      { src: "/images/heroimg.png", alt: "College campus view", caption: "Campus & Learning Environment" },
+{ src: "/images/slider2.jpeg", alt: "Training kitchen lab", caption: "Practical Training Labs" },
+{ src: "/images/slider3.jpeg", alt: "Advanced cooking practice session", caption: "Hands-On Culinary Experience" },
+{ src: "/images/slider5.png", alt: "Hospitality students in food preparation class", caption: "Industry-Based Skill Development" },
+{ src: "/images/slider6.png", alt: "Professional chef training workshop", caption: "Real-World Kitchen Exposure" },
+{ src: "/images/wow7.png", alt: "Students performing culinary assessment", caption: "Skill Demonstration & Evaluation" },
+
     ],
     []
   );
@@ -188,8 +192,8 @@ export default function Home() {
     () => [
       { title: "Practical Training", text: "Hands-on labs and structured practice across core hotel departments.", img: "/images/slider1.jpeg", alt: "Practical training lab" },
       { title: "Industry Exposure", text: "Professional grooming, communication and service standards aligned to industry needs.", img: "/images/slider2.jpeg", alt: "Industry exposure and professional grooming" },
-      { title: "Career Guidance", text: "Internship support, interview readiness and next-step planning for students.", img: "/images/slider1.jpeg", alt: "Career guidance and internship support" },
-      { title: "Student Support", text: "Guidance for students and parents with a friendly, student-first environment.", img: "/images/slider2.jpeg", alt: "Student support and counselling" },
+      { title: "Career Guidance", text: "Internship support, interview readiness and next-step planning for students.", img: "/images/hello.jpeg", alt: "Career guidance and internship support" },
+      { title: "Student Support", text: "Guidance for students and parents with a friendly, student-first environment.", img: "/images/wow9.png", alt: "Student support and counselling" },
     ],
     []
   );
@@ -198,7 +202,7 @@ export default function Home() {
     () => [
       { k: "Job-ready skills", v: "Training + Grooming", img: "/images/slider2.jpeg", alt: "Students learning practical skills" },
       { k: "Career options", v: "Hotels • Travel • Events", img: "/images/slider1.jpeg", alt: "Hospitality career opportunities" },
-      { k: "Learning approach", v: "Practical + Industry focus", img: "/images/slider2.jpeg", alt: "Industry focused training" },
+      { k: "Learning approach", v: "Practical + Industry focus", img: "/images/wow10.png", alt: "Industry focused training" },
     ],
     []
   );
@@ -333,7 +337,7 @@ const placementLogos: PlacementLogo[] = useMemo(
 { src: "/images/placements/oberoi.png", alt: "The Oberoi" },
 { src: "/images/placements/lemontree.png", alt: "Lemon Tree Hotels" },
 { src: "/images/placements/novotel.png", alt: "Novotel" },
-{ src: "/images/placements/holidayinn.png", alt: "Holiday Inn" },
+{ src: "/images/placements/holidayinn.svg", alt: "Holiday Inn" },
 { src: "/images/placements/accor.png", alt: "Accor" },
 
 
@@ -358,31 +362,31 @@ const abroadPlacements = useMemo(
       name: "Komire Srivastav",
       company: "Nodric Palace & Spa",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student1.png",
     },
     {
       name: "CH Rutvik Goud",
       company: "Nodric Resort",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student2.png",
     },
     {
       name: "Kadhurkam Rahul",
       company: "Nodric Holding",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student3.png",
     },
     {
       name: "Golla Karnakar",
       company: "Nodric Homes Resort",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student4.png",
     },
     {
       name: "Basa Nithin",
       company: "Nodric Resort",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student5.png",
     },
     {
       name: "Balamuri Rajesh",
@@ -394,13 +398,13 @@ const abroadPlacements = useMemo(
       name: "Kasarla Srikar",
       company: "Ramada",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student7.png",
     },
     {
       name: "Akuthota Yashwan",
       company: "Nodric",
       location: "Bahrain",
-      img: "/images/students/student6.png",
+      img: "/images/students/student8.png",
     },
   ],
   []
@@ -427,7 +431,7 @@ const abroadPlacements = useMemo(
                   <div className="slide__overlay" />
                   <div className="slide__content">
                     <div className="slide__inner">
-                      <div className="slide__badge">{SITE.name}</div>
+                      {/* <div className="slide__badge">{SITE.name}</div> */}
                       <h2 className="slide__title">{s.caption ?? "College Gallery"}</h2>
                       <p className="slide__sub">{SITE.location} • Admissions Open</p>
                       <div className="slide__actions">
@@ -579,9 +583,17 @@ const abroadPlacements = useMemo(
                     value={form.course}
                     onChange={(e) => setForm((p) => ({ ...p, course: e.target.value as EnquiryForm["course"] }))}
                   >
-                    <option value="BHM">BHM</option>
-                    <option value="Diploma">Diploma</option>
-                    <option value="Certificate">Certificate</option>
+                    <option value="Advanced Diploma In Hotel
+Management">Advanced Diploma In Hotel
+Management</option>
+              <option value="Diploma In Hotel Management">Diploma In Hotel Management</option>
+              <option value="Post-Graduation Diploma In Hotel Management">Post-Graduation Diploma In Hotel Management</option>
+              <option value="Diploma In F&B Service & Housekeeping
+">Diploma In F&B Service & Housekeeping
+</option>
+              <option value="Diploma In F&B Service">Diploma In F&B Service</option>
+              <option value="Diploma In Front Office">Diploma In Front Office</option>
+              <option value="Diploma In Housekeeping">Diploma In Housekeeping</option>
                   </select>
                 </div>
 
@@ -658,12 +670,12 @@ const abroadPlacements = useMemo(
             </div>
 
             <div className="gainCta">
-              <Link className="btn btn--primary" to="/admissions">
+              {/* <Link className="btn btn--primary" to="/admissions">
                 Get Admission Details
               </Link>
               <a className="btn btn--ghost" href={quickWaHref} target="_blank" rel="noreferrer">
                 Ask on WhatsApp
-              </a>
+              </a> */}
             </div>
           </aside>
         </div>
@@ -688,15 +700,20 @@ const abroadPlacements = useMemo(
             <div className="coursesGrid">
               {courses.map((c, index) => (
                 <article key={c.title} className="courseCardUnified" style={{ ["--cardBg" as any]: c.theme.leftBg }}>
-                  <img src={slides[index % slides.length]?.src} alt={c.title} className="courseCardUnified__img" />
+                  <img
+  src={`/images/${index === 0 ? "wow" : `wow${index + 1}`}.png`}
+  alt={c.title}
+  className="courseCardUnified__img"
+/>
+
 
                   <div className="courseCardUnified__overlay" />
 
                   <div className="courseCardUnified__content">
-                    <div className="courseCardUnified__top">
+                    {/* <div className="courseCardUnified__top">
                       <span className="courseCardUnified__tag">{c.tag.toUpperCase()}</span>
                       <span className="courseCardUnified__icon">{c.visual.icon}</span>
-                    </div>
+                    </div> */}
 
                     <h3 className="courseCardUnified__title">{c.title}</h3>
                     <p className="courseCardUnified__desc">{c.desc}</p>
@@ -901,7 +918,7 @@ const abroadPlacements = useMemo(
     <aside className="faqRight" aria-label="Student support visual">
       <div className="faqPhotoCard">
         <img
-          src="/images/slider2.jpeg"
+          src="/images/wow11.png"
           alt="Students in training session"
           className="faqPhotoCard__img"
           loading="lazy"
@@ -954,9 +971,11 @@ const abroadPlacements = useMemo(
       <div className="admissionSlider" aria-label="Campus and training highlights">
         <div className="admissionSlider__track">
           {[
-            { src: "/images/slider1.jpeg", caption: "Practical Training Labs" },
-            { src: "/images/slider2.jpeg", caption: "Industry Exposure & Grooming" },
-            { src: "/images/slider1.jpeg", caption: "Student Life & Learning" },
+            { src: "/images/heroimg.png", caption: "Practical Training Labs" },
+            { src: "/images/heroimg2.png", caption: "Industry Exposure & Grooming" },
+            { src: "/images/heroimg1.png", caption: "Student Life & Learning" },
+            { src: "/images/heroimg3.png", caption: "Student Life & Learning" },
+            { src: "/images/heroimg4.png", caption: "Student Life & Learning" },
           ].map((s, i) => (
             <div className="admissionSlide" key={i}>
               <img src={s.src} alt={s.caption} loading="lazy" />
@@ -1017,9 +1036,17 @@ const abroadPlacements = useMemo(
               value={form.course}
               onChange={(e) => setForm((p) => ({ ...p, course: e.target.value as EnquiryForm["course"] }))}
             >
-              <option value="BHM">BHM</option>
-              <option value="Diploma">Diploma</option>
-              <option value="Certificate">Certificate</option>
+              <option value="Advanced Diploma In Hotel
+Management">Advanced Diploma In Hotel
+Management</option>
+              <option value="Diploma In Hotel Management">Diploma In Hotel Management</option>
+              <option value="Post-Graduation Diploma In Hotel Management">Post-Graduation Diploma In Hotel Management</option>
+              <option value="Diploma In F&B Service & Housekeeping
+">Diploma In F&B Service & Housekeeping
+</option>
+              <option value="Diploma In F&B Service">Diploma In F&B Service</option>
+              <option value="Diploma In Front Office">Diploma In Front Office</option>
+              <option value="Diploma In Housekeeping">Diploma In Housekeeping</option>
             </select>
           </div>
 
@@ -1037,7 +1064,7 @@ const abroadPlacements = useMemo(
 
 
       {/* Sticky Mobile CTA */}
-      <div className="stickyCta" role="region" aria-label="Quick actions">
+      {/* <div className="stickyCta" role="region" aria-label="Quick actions">
         <a className="stickyCta__btn" href={telHref}>
           Call Now
         </a>
@@ -1047,7 +1074,7 @@ const abroadPlacements = useMemo(
         <Link className="stickyCta__btn stickyCta__btn--blue" to="/admissions">
           Apply
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

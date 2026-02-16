@@ -1,10 +1,27 @@
 export default function Gallery() {
   return (
-    <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 16px" }}>
-      <h1 style={{ marginTop: 0, color: "white" }}>Gallery</h1>
-      <p style={{ color: "rgba(255,255,255,.75)" }}>
-        Add real campus and lab photos here.
-      </p>
+    <div
+      style={{
+        maxWidth: 1120,
+        margin: "0 auto",
+        padding: "0 16px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80vh",
+        textAlign: "center",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "48px",
+          fontWeight: 550,
+          color: "black",
+          letterSpacing: "1px",
+        }}
+      >
+        Gallery Page Coming Soon
+      </h1>
     </div>
   );
 }

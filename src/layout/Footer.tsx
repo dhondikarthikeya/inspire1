@@ -50,13 +50,19 @@ export default function Footer() {
             {/* LEFT */}
             <section className="refFooter__left" aria-label="College overview">
               <div className="refFooter__brandRow">
-                <div className="refFooter__logoMark" aria-hidden="true">
-                  {initials}
-                </div>
-                <div className="refFooter__brandName">
-                  {SITE?.name || "Hotel Management College"}
-                </div>
-              </div>
+  <div className="refFooter__logoMark">
+    <img 
+      src="/images/logo.png"   // <-- change to your logo path
+      alt={SITE?.name || "Hotel Management College"}
+      className="refFooter__logoImage"
+    />
+  </div>
+
+  <div className="refFooter__brandName">
+    {SITE?.name || "Hotel Management College"}
+  </div>
+</div>
+
 
               <h2 className="refFooter__headline">
                 The Foundation Of{" "}
@@ -200,24 +206,25 @@ export default function Footer() {
                   </a>
 
                   {/* Campus + Get Directions */}
-                  <div className="refFooter__address" aria-label="Address">
-                    <div className="refFooter__addressLabel">Campus</div>
-                    <div className="refFooter__addressText">
-                      {SITE?.location || "Armoor, Nizamabad"}
-                    </div>
+<div className="refFooter__address" aria-label="Address">
+  <div className="refFooter__addressLabel">Campus</div>
+  <div className="refFooter__addressText">
+    1st Floor, Opp: MR Garden Rd, Parkit, Armur, Telangana 503224
+  </div>
 
-                    <a
-                      className="refFooter__directionsBtn"
-                      href={mapsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <span className="refFooter__dirIcon" aria-hidden="true">
-                        <MapPinIcon />
-                      </span>
-                      Get Directions
-                    </a>
-                  </div>
+  <a
+    className="refFooter__directionsBtn"
+    href="https://www.google.com/maps/search/?api=1&query=1st+Floor,+Opp:+MR+Garden+Rd,+Parkit,+Armur,+Telangana+503224"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <span className="refFooter__dirIcon" aria-hidden="true">
+      <MapPinIcon />
+    </span>
+    Get Directions
+  </a>
+</div>
+
                 </div>
               </div>
             </section>
@@ -269,7 +276,7 @@ export default function Footer() {
           font-family: var(--font-main);
           background: #fff;
           color: rgba(0,0,0,.86);
-          border-top: 1px solid rgba(0,0,0,.10);
+          // border-top: 1px solid rgba(0,0,0,.10);
         }
 
         .refFooter__container{
@@ -292,22 +299,22 @@ export default function Footer() {
         }
 
         .refFooter__logoMark{
-          width: 34px;
-          height: 34px;
-          border-radius: 8px;
+          width: 50px;
+          height: 50px;
+          // border-radius: 8px;
           display: grid;
           place-items: center;
           font-weight: 900;
           letter-spacing: .4px;
-          border: 1px solid rgba(0,0,0,.14);
-          background: rgba(0,0,0,.04);
+          // border: 1px solid rgba(0,0,0,.14);
+          // background: rgba(0,0,0,.04);
           user-select: none;
           flex: 0 0 auto;
         }
 
         .refFooter__brandName{
           font-size: 18px;
-          font-weight: 900;
+          font-weight: 650;
           letter-spacing: .2px;
         }
 
@@ -315,11 +322,11 @@ export default function Footer() {
           margin: 18px 0 0;
           font-size: 34px;
           line-height: 1.12;
-          font-weight: 500;
+          font-weight: 400;
           letter-spacing: -.2px;
         }
 
-        .refFooter__headlineBold{ font-weight: 900; }
+        .refFooter__headlineBold{ font-weight: 700; }
 
         .refFooter__subtext{
           margin: 14px 0 0;
@@ -347,7 +354,7 @@ export default function Footer() {
           border: 2px solid #1f2a7a;
           color: #fff;
           background: #1f2a7a;
-          font-weight: 900;
+          font-weight: 650;
           font-size: 14px;
           letter-spacing: .2px;
           transition: transform .14s ease, filter .14s ease;
@@ -402,8 +409,8 @@ export default function Footer() {
           border-radius: 7px;
           display: inline-grid;
           place-items: center;
-          border: 1px solid rgba(0,0,0,.12);
-          background: rgba(0,0,0,.04);
+          // border: 1px solid rgba(0,0,0,.12);
+          // background: rgba(0,0,0,.04);
           color: rgba(0,0,0,.76);
           flex: 0 0 auto;
         }
@@ -425,8 +432,8 @@ export default function Footer() {
         }
 
         .refFooter__colTitle{
-          font-size: 13px;
-          font-weight: 900;
+          font-size: 18px;
+          font-weight: 700;
           color: rgba(0,0,0,.80);
           margin: 4px 0 12px;
         }
@@ -435,7 +442,7 @@ export default function Footer() {
           display: block;
           text-decoration: none;
           font-size: 13.5px;
-          font-weight: 650;
+          font-weight: 550;
           color: rgba(0,0,0,.62);
           padding: 8px 0;
           line-height: 1.35;
@@ -483,8 +490,8 @@ export default function Footer() {
         }
 
         .refFooter__addressLabel{
-          font-size: 12px;
-          font-weight: 900;
+          font-size: 16px;
+          font-weight: 700;
           color: rgba(0,0,0,.72);
         }
 
@@ -505,7 +512,7 @@ export default function Footer() {
           gap: 10px;
           text-decoration: none;
           padding: 10px 12px;
-          border-radius: 10px;
+          border-radius: 5px;
           border: 1px solid rgba(31,42,122,.22);
           background: rgba(31,42,122,.06);
           color: rgba(31,42,122,.95);
@@ -555,7 +562,7 @@ export default function Footer() {
         .refFooter__bottomLink{
           text-decoration: none;
           font-size: 13px;
-          font-weight: 750;
+          font-weight: 600;
           color: rgba(0,0,0,.58);
           transition: color .14s ease;
           padding: 6px 0;
@@ -570,7 +577,7 @@ export default function Footer() {
         .refFooter__copyright{
           text-align: right;
           font-size: 13px;
-          font-weight: 750;
+          font-weight: 600;
           color: rgba(0,0,0,.58);
         }
 
@@ -581,13 +588,14 @@ export default function Footer() {
           border-top: 1px solid rgba(0,0,0,.12); /* ✅ NEW border above credit */
           padding-top: 10px;
           margin-top: 4px;
+          margin-bottom: 8px;
         }
 
         .refFooter__credit{
           text-decoration: none;
-          font-size: 12.5px;
-          font-weight: 800;
-          color: rgba(0,0,0,.58);
+          font-size: 15px;
+          font-weight: 550;
+          color: rgba(0,0,0,.86);
           display: inline-flex;
           align-items: center;
           gap: 6px;
@@ -595,18 +603,18 @@ export default function Footer() {
           padding: 2px 0;
         }
 
-        .refFooter__credit:hover{
-          color: rgba(0,0,0,.86);
-          transform: translateY(-1px);
-        }
+        // .refFooter__credit:hover{
+        //   color: rgba(0,0,0,.86);
+        //   transform: translateY(-1px);
+        // }
 
         .refFooter__heart{
           color: #e11d48;
-          font-weight: 900;
+          font-weight: 1000;
           line-height: 1;
         }
 
-        .refFooter__creditBrand{ font-weight: 900; }
+        .refFooter__creditBrand{ font-weight: 700; }
 
         .refFooter__cta:focus-visible,
         .refFooter__link:focus-visible,
@@ -625,9 +633,9 @@ export default function Footer() {
           .refFooter__vDivider{ display: none; }
 
           .refFooter__col{
-            border: 1px solid rgba(0,0,0,.08);
-            background: rgba(0,0,0,.015);
-            border-radius: 14px;
+            // border: 1px solid rgba(0,0,0,.08);
+            // background: rgba(0,0,0,.015);
+            // border-radius: 14px;
             padding: 14px 14px 10px;
           }
 
