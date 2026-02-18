@@ -3440,3 +3440,35 @@ inset 0 1px 0 rgba(255,255,255,.8);
 .slide__title {
   font-weight: 550;
 }
+/* =========================
+   Scroll animation (no libs)
+   ========================= */
+
+[data-scroll] {
+  --p: 0;          /* set by JS (0..1) */
+  --fromY: 28px;
+  --fromScale: 0.985;
+
+  opacity: calc(0.12 + (var(--p) * 0.88));
+  transform:
+    translate3d(0, calc((1 - var(--p)) * var(--fromY)), 0)
+    scale(calc(var(--fromScale) + (var(--p) * (1 - var(--fromScale)))));
+  filter: blur(calc((1 - var(--p)) * 6px));
+  will-change: transform, opacity, filter;
+}
+
+.whyCard[data-scroll],
+.courseCardUnified[data-scroll],
+.placementsLogoCard[data-scroll],
+.gainTile[data-scroll] {
+  --fromY: 18px;
+  --fromScale: 0.99;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll] {
+    opacity: 1.8 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

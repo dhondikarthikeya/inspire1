@@ -7,7 +7,7 @@ const MENU = [
   { to: "/about", label: "About" },
   { to: "/courses", label: "Courses" },
   { to: "/admissions", label: "Admissions" },
-  { to: "/facilities", label: "Facilities" },
+  { to: "/placement", label: "Placement" },
   { to: "/gallery", label: "Gallery" },
   { to: "/notices", label: "Notices" },
   { to: "/contact", label: "Contact" },
@@ -25,8 +25,14 @@ export default function Header() {
   // iOS-safe scroll lock
   const scrollYRef = useRef(0);
 
-  // Close drawer on route change
+  // ✅ controls whether we restore old scroll position when unlocking body scroll
+  // - true: user closed the menu normally (keep their position)
+  // - false: menu closed due to navigation (do NOT restore; let the new page start at top)
+  const restoreScrollOnUnlockRef = useRef(true);
+
+  // Close drawer on route change (navigation)
   useEffect(() => {
+    restoreScrollOnUnlockRef.current = false; // ✅ do not restore old Y on nav
     setOpen(false);
   }, [location.pathname]);
 
@@ -46,20 +52,31 @@ export default function Header() {
 
     return () => {
       const y = scrollYRef.current;
+
       body.style.position = "";
       body.style.top = "";
       body.style.left = "";
       body.style.right = "";
       body.style.width = "";
       body.style.overflow = "";
-      window.scrollTo(0, y);
+
+      // ✅ only restore scroll if menu was closed normally (not via navigation)
+      if (restoreScrollOnUnlockRef.current) {
+        window.scrollTo(0, y);
+      }
+
+      // reset for next open/close cycle
+      restoreScrollOnUnlockRef.current = true;
     };
   }, [open]);
 
-  // Close with ESC
+  // Close with ESC (treat as normal close => restore position)
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        restoreScrollOnUnlockRef.current = true;
+        setOpen(false);
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
@@ -136,7 +153,10 @@ export default function Header() {
           {/* LOGO */}
           <Link
             to="/"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              // treat as navigation close; route effect will set restore false
+              setOpen(false);
+            }}
             style={{
               display: "flex",
               alignItems: "center",
@@ -168,7 +188,10 @@ export default function Header() {
                 key={item.to}
                 to={item.to}
                 end={item.end}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  // navigation will close via route effect; just close UI
+                  setOpen(false);
+                }}
                 className={({ isActive }) =>
                   `desktopLink ${isActive ? "active" : ""}`
                 }
@@ -187,7 +210,10 @@ export default function Header() {
           {/* MENU BUTTON */}
           <button
             className="menuBtn"
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              restoreScrollOnUnlockRef.current = true; // normal open/close cycle
+              setOpen(true);
+            }}
             aria-label="Open menu"
             aria-haspopup="dialog"
             aria-expanded={open}
@@ -203,7 +229,10 @@ export default function Header() {
         {/* MOBILE DRAWER */}
         <div
           className={`overlay ${open ? "show" : ""}`}
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            restoreScrollOnUnlockRef.current = true; // normal close => restore
+            setOpen(false);
+          }}
           role="presentation"
         >
           <aside
@@ -232,7 +261,10 @@ export default function Header() {
               <button
                 ref={closeBtnRef}
                 className="iconBtn"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  restoreScrollOnUnlockRef.current = true; // normal close => restore
+                  setOpen(false);
+                }}
                 aria-label="Close menu"
               >
                 ✕
@@ -246,7 +278,11 @@ export default function Header() {
                   key={item.to}
                   to={item.to}
                   end={item.end}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    // navigation close: do NOT restore old scroll
+                    restoreScrollOnUnlockRef.current = false;
+                    setOpen(false);
+                  }}
                   className={({ isActive }) =>
                     `drawerItem ${isActive ? "active" : ""}`
                   }
@@ -264,7 +300,10 @@ export default function Header() {
               <Link
                 className="ctaPrimary"
                 to="/admissions"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  restoreScrollOnUnlockRef.current = false;
+                  setOpen(false);
+                }}
               >
                 Apply Now
               </Link>
@@ -273,6 +312,11 @@ export default function Header() {
                 href="https://wa.me/"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => {
+                  // opening external link: keep position
+                  restoreScrollOnUnlockRef.current = true;
+                  setOpen(false);
+                }}
               >
                 WhatsApp
               </a>
@@ -324,7 +368,7 @@ export default function Header() {
             }
           }
 
-          /* Desktop links: orange text on hover + BLACK underline */
+          /* Desktop links: blue text on hover + BLACK underline */
           .desktopLink {
             color: #111;
             position: relative;
@@ -338,13 +382,14 @@ export default function Header() {
             left: 0;
             bottom: -2px;
             width: 100%;
-            height: 2px;
+            height: 3px;
             background: #111;
             transform: scaleX(0);
             transform-origin: left;
             transition: transform .18s ease;
+            border-radius: 8px 8px 0px 0px;
           }
-          .desktopLink:hover { color: ##2563eb; }
+          .desktopLink:hover { color: #2563eb; }
           .desktopLink:hover::after { transform: scaleX(1); }
           .desktopLink.active { color: #2563eb; }
           .desktopLink.active::after { transform: scaleX(1); }
@@ -353,7 +398,6 @@ export default function Header() {
           .logoWrap {
             width: 85px;
             height: 75px;
-            // background: #fff;
             display: grid;
             place-items: center;
             overflow: hidden;
@@ -392,9 +436,6 @@ export default function Header() {
             display: block;
           }
 
-          /* ✅ IMPORTANT FIX:
-             overlay + drawer are FIXED so background doesn't scroll,
-             and drawer stays pinned on mobile/tablet */
           .overlay {
             position: fixed;
             inset: 0;
@@ -412,10 +453,10 @@ export default function Header() {
           }
 
           .drawer {
-            position: fixed;     /* ✅ was absolute */
+            position: fixed;
             top: 0;
             right: 0;
-            height: 100dvh;      /* better on mobile */
+            height: 100dvh;
             width: min(360px, 92vw);
             background: #fff;
             box-shadow: -18px 0 50px rgba(0,0,0,.18);
@@ -498,12 +539,11 @@ export default function Header() {
 
           .drawerNav {
             padding: 12px 12px 0 12px;
-            overflow: auto;                 /* ✅ only this scrolls */
+            overflow: auto;
             flex: 1 1 auto;
             -webkit-overflow-scrolling: touch;
           }
 
-          /* Mobile drawer items: orange text on hover + BLACK underline (no box) */
           .drawerItem {
             display: flex;
             align-items: center;
@@ -523,11 +563,12 @@ export default function Header() {
             left: 14px;
             right: 14px;
             bottom: 6px;
-            height: 2px;
+            height: 3.5px;
             background: #111;
             transform: scaleX(0);
             transform-origin: left;
             transition: transform .18s ease;
+            border-radius: 10px 10px 0px 0px;
           }
           .drawerItem:hover { color: #2563eb; }
           .drawerItem:hover::after { transform: scaleX(1); }

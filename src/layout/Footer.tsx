@@ -127,10 +127,10 @@ export default function Footer() {
                   <Link className="refFooter__link" to="/courses">
                     Hotel Management Courses
                   </Link>
-                  <Link className="refFooter__link" to="/placements">
+                  <Link className="refFooter__link" to="/placement">
                     Placements & Internships
                   </Link>
-                  <Link className="refFooter__link" to="/facilities">
+                  <Link className="refFooter__link" to="/placement">
                     Practical Training Labs
                   </Link>
                   <Link className="refFooter__link" to="/contact">

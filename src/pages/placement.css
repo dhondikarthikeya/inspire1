@@ -1,0 +1,1199 @@
+/* placement.css - fully scoped to .placementPage only */
+
+.placementPage {
+  font-family: var(--font-main);
+  color: #111;
+  background: #fff;
+}
+
+.placementPage__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  /* padding: 0 16px; */
+}
+
+/* -------------------------
+   HERO
+------------------------- */
+.placementPage__hero {
+  padding: 30px 0 18px;
+  background:
+    radial-gradient(900px 420px at 22% 18%, rgba(47, 111, 237, 0.20), transparent 60%),
+    radial-gradient(900px 420px at 85% 22%, rgba(124, 77, 255, 0.14), transparent 60%),
+    linear-gradient(180deg, #f4fbff 0%, #ffffff 55%, #ffffff 100%);
+}
+
+.placementPage__heroInner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.placementPage__heroTitle {
+  margin: 0;
+  font-size: clamp(34px, 4vw, 50px);
+  font-weight: 550;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+}
+.placementPage__heroLeft{
+    padding: 20px 0px;
+}
+.placementPage__hl {
+  color: #2f6fed;
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 7px;
+  text-decoration-color: rgba(47, 111, 237, 0.28);
+}
+
+.placementPage__heroSub {
+  margin: 16px 0 0;
+  max-width: 72ch;
+  color: rgba(17, 17, 17, 0.68);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.placementPage__heroBtns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.placementPage__btnPrimary,
+.placementPage__btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-weight: 650;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.placementPage__btnPrimary {
+  background: #0f172a;
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.placementPage__btnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 46px rgba(15, 23, 42, 0.22);
+}
+
+.placementPage__btnGhost {
+  background: #ffffff;
+  color: #111;
+  border-color: rgba(17, 17, 17, 0.14);
+  box-shadow: 0 12px 30px rgba(17, 17, 17, 0.06);
+}
+
+.placementPage__btnGhost:hover {
+  transform: translateY(-1px);
+  border-color: rgba(47, 111, 237, 0.28);
+}
+
+.placementPage__miniGrid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.placementPage__miniCard {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 12px 26px rgba(17, 17, 17, 0.06);
+}
+
+.placementPage__miniTop {
+  font-weight: 650;
+  font-size: 14px;
+}
+
+.placementPage__miniBottom {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(17, 17, 17, 0.62);
+}
+
+.placementPage__heroRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.placementPage__heroCard {
+  position: relative;
+  width: min(720px, 100%);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 22px 55px rgba(17, 17, 17, 0.18);
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  background: #fff;
+}
+
+.placementPage__heroCard.isFallback {
+  background:
+    radial-gradient(420px 260px at 20% 20%, rgba(47,111,237,0.35), transparent 60%),
+    radial-gradient(420px 260px at 80% 30%, rgba(124,77,255,0.25), transparent 60%),
+    linear-gradient(180deg, #0b2a6f 0%, #2f6fed 55%, #f6fbff 100%);
+  min-height: 380px;
+}
+
+.placementPage__heroCard img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.placementPage__heroOverlay {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(17, 17, 17, 0.42);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.placementPage__heroOverlayTitle {
+  font-weight: 700;
+}
+
+.placementPage__heroOverlaySub {
+  margin-top: 4px;
+  opacity: 0.9;
+  font-size: 13px;
+}
+
+/* -------------------------
+   HEADINGS
+------------------------- */
+.placementPage__sectionHead {
+  text-align: center;
+  padding: 46px 0 14px;
+}
+
+.placementPage__h2 {
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 550;
+  letter-spacing: -0.6px;
+}
+
+.placementPage__p {
+  margin: 12px auto 0;
+  max-width: 72ch;
+  color: rgba(17, 17, 17, 0.68);
+  line-height: 1.7;
+}
+
+.placementPage__underline {
+  position: relative;
+  display: inline-block;
+}
+
+.placementPage__underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(124, 77, 255, 0.55);
+}
+
+/* -------------------------
+   SLIDER
+------------------------- */
+.placementPage__sliderSection {
+  padding-bottom: 10px;
+}
+
+.placementPage__sliderShell {
+  position: relative;
+  margin-top: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.10);
+  overflow: hidden;
+}
+
+.placementPage__sliderTrack {
+  display: flex;
+  gap: 16px;
+  padding: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.placementPage__sliderTrack::-webkit-scrollbar {
+  height: 10px;
+}
+.placementPage__sliderTrack::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 17, 0.18);
+  border-radius: 999px;
+}
+.placementPage__sliderTrack::-webkit-scrollbar-track {
+  background: rgba(17, 17, 17, 0.06);
+  border-radius: 999px;
+}
+
+.placementPage__navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.placementPage__navBtn--left {
+  left: 10px;
+}
+.placementPage__navBtn--right {
+  right: 10px;
+}
+
+.placementPage__navBtn:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.placementPage__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-bottom: 18px;
+}
+
+.placementPage__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  background: rgba(17, 17, 17, 0.10);
+  cursor: pointer;
+}
+
+.placementPage__dot.isActive {
+  background: rgba(47, 111, 237, 0.85);
+  border-color: rgba(47, 111, 237, 0.95);
+}
+
+/* cards inside slider */
+.placementPage__studentCard {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  border: 1px solid rgba(17, 17, 17, 0.06);
+}
+
+.placementPage__studentCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.16);
+}
+
+.placementPage__studentCard--slide {
+  scroll-snap-align: start;
+  flex: 0 0 280px;
+}
+
+.placementPage__studentImg {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.placementPage__studentImg img {
+  width: 100%;
+  height: 130%;
+  object-fit: cover;
+  display: block;
+}
+
+.placementPage__chip {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 750;
+  color: #fff;
+  background: rgba(47, 111, 237, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+.placementPage__studentBody {
+  padding: 14px 16px 16px;
+}
+
+.placementPage__studentName {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 550;
+  color: #0f2b5b;
+}
+
+.placementPage__studentCompany {
+  margin: 6px 0 12px;
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.65);
+}
+
+.placementPage__loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(47, 111, 237, 0.08);
+  border: 1px solid rgba(47, 111, 237, 0.16);
+  color: rgba(17, 17, 17, 0.85);
+  font-weight: 750;
+  font-size: 13px;
+}
+
+.placementPage__locIcon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(47, 111, 237, 0.12);
+  color: rgba(47, 111, 237, 0.95);
+}
+
+/* -------------------------
+   PARTNERS (logos)
+------------------------- */
+.placementPage__partners {
+  padding: 74px 0;
+  background:
+    radial-gradient(900px 520px at 20% 5%, rgba(22, 163, 255, 0.18), transparent 60%),
+    radial-gradient(1000px 560px at 85% 10%, rgba(124, 77, 255, 0.14), transparent 62%),
+    linear-gradient(135deg, #071423 0%, #0b1a2f 40%, #1c0f3a 100%);
+}
+
+.placementPage__h2Light {
+  color: #fff;
+  text-align: center;
+}
+
+.placementPage__pLight {
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+}
+
+.placementPage__handUnderline {
+  position: relative;
+  display: inline-block;
+}
+
+.placementPage__handUnderline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(167, 139, 250, 0.75);
+}
+
+.placementPage__statsRow {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.placementPage__stat {
+  min-width: 160px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.placementPage__statK {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.placementPage__statV {
+  margin-top: 3px;
+  font-size: 16px;
+  font-weight: 550;
+  color: #fff;
+}
+
+.placementPage__logosPanel {
+  margin-top: 26px;
+  border-radius: 22px;
+  padding: 22px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+}
+
+.placementPage__logoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.placementPage__logoCard {
+  height: 74px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.10);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.placementPage__logoCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.16);
+}
+
+.placementPage__logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* -------------------------
+   CTA
+------------------------- */
+.placementPage__cta {
+  padding: 44px 0 80px;
+  background: #fff;
+}
+
+.placementPage__ctaInner {
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 12px 26px rgba(17, 17, 17, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.placementPage__ctaTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 550;
+}
+
+.placementPage__ctaSub {
+  margin: 6px 0 0;
+  color: rgba(17, 17, 17, 0.68);
+  line-height: 1.6;
+}
+
+.placementPage__ctaBtns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* -------------------------
+   RESPONSIVE
+------------------------- */
+@media (max-width: 980px) {
+  .placementPage__heroInner {
+    grid-template-columns: 1fr;
+  }
+
+  .placementPage__heroRight {
+    justify-content: center;
+  }
+
+  .placementPage__miniGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .placementPage__heroCard img,
+  .placementPage__heroCard.isFallback {
+    height: 320px;
+    min-height: 320px;
+  }
+
+  .placementPage__logoGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .placementPage__heroCard img,
+  .placementPage__heroCard.isFallback {
+    height: 240px;
+    min-height: 240px;
+  }
+
+  .placementPage__btnPrimary,
+  .placementPage__btnGhost {
+    width: 100%;
+  }
+
+  .placementPage__logoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .placementPage__logoCard {
+    height: 68px;
+  }
+
+  .placementPage__navBtn {
+    display: none; /* touch swipe on mobile */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placementPage__btnPrimary,
+  .placementPage__btnGhost,
+  .placementPage__studentCard,
+  .placementPage__logoCard {
+    transition: none !important;
+  }
+}
+/* =========================
+   TESTIMONIAL SLIDER STYLES
+   ========================= */
+
+.placementPage .placementPage__sliderShell--testimonial {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.placementPage .placementPage__sliderTrack--testimonial {
+  gap: 18px;
+}
+
+/* testimonial card */
+.placementPage .placementPage__testimonialCard {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.10);
+  padding: 16px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.placementPage .placementPage__testimonialCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.14);
+}
+
+.placementPage .placementPage__testimonialCard--slide {
+  scroll-snap-align: start;
+  flex: 0 0 min(720px, 92%);
+}
+
+/* top row: avatar + name */
+.placementPage .placementPage__testimonialTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.placementPage .placementPage__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 3px solid rgba(47, 111, 237, 0.22);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.10);
+  flex: 0 0 auto;
+}
+
+.placementPage .placementPage__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placementPage .placementPage__whoName {
+  font-weight: 850;
+  color: #0f2b5b;
+  line-height: 1.2;
+}
+
+.placementPage .placementPage__whoRole {
+  margin-top: 2px;
+  font-size: 13px;
+  color: rgba(17, 17, 17, 0.62);
+}
+
+/* speech bubble */
+.placementPage .placementPage__bubble {
+  margin-top: 14px;
+  position: relative;
+  border-radius: 18px;
+  padding: 16px 16px;
+  background:
+    radial-gradient(700px 260px at 18% 20%, rgba(47, 111, 237, 0.10), transparent 60%),
+    radial-gradient(620px 240px at 86% 18%, rgba(124, 77, 255, 0.08), transparent 62%),
+    rgba(245, 248, 255, 0.9);
+  border: 1px solid rgba(47, 111, 237, 0.14);
+}
+
+.placementPage .placementPage__bubble::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 22px;
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+  background: rgba(245, 248, 255, 0.9);
+  border-left: 1px solid rgba(47, 111, 237, 0.14);
+  border-top: 1px solid rgba(47, 111, 237, 0.14);
+}
+
+.placementPage .placementPage__testimonialText {
+  margin: 0;
+  color: rgba(17, 17, 17, 0.78);
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .placementPage .placementPage__testimonialCard--slide {
+    flex: 0 0 92%;
+  }
+}
+/* =========================
+   Testimonial layout (LEFT image, RIGHT text)
+   ========================= */
+
+.placementPage .placementPage__sliderShell--testimonial {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.placementPage .placementPage__sliderTrack--testimonial {
+  gap: 18px;
+}
+
+/* The whole testimonial slide is horizontal */
+.placementPage .placementPage__testimonialCard {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.10);
+  padding: 16px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.placementPage .placementPage__testimonialCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.14);
+}
+
+.placementPage .placementPage__testimonialCard--slide {
+  scroll-snap-align: start;
+  flex: 0 0 min(860px, 94%);
+}
+
+/* left avatar block */
+.placementPage .placementPage__tLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placementPage .placementPage__tAvatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 3px solid rgba(47, 111, 237, 0.20);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.10);
+  background: #fff;
+}
+
+.placementPage .placementPage__tAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* right content */
+.placementPage .placementPage__tHeader {
+  margin-bottom: 10px;
+}
+
+.placementPage .placementPage__tName {
+  font-weight: 850;
+  color: #0f2b5b;
+  line-height: 1.2;
+}
+
+.placementPage .placementPage__tRole {
+  margin-top: 2px;
+  font-size: 13px;
+  color: rgba(17, 17, 17, 0.62);
+}
+
+/* bubble */
+.placementPage .placementPage__tBubble {
+  position: relative;
+  border-radius: 18px;
+  padding: 16px 16px;
+  background:
+    radial-gradient(700px 260px at 18% 20%, rgba(47, 111, 237, 0.10), transparent 60%),
+    radial-gradient(620px 240px at 86% 18%, rgba(124, 77, 255, 0.08), transparent 62%),
+    rgba(245, 248, 255, 0.92);
+  border: 1px solid rgba(47, 111, 237, 0.14);
+}
+
+.placementPage .placementPage__tText {
+  margin: 0;
+  color: rgba(17, 17, 17, 0.78);
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+/* Mobile: stack image on top */
+@media (max-width: 640px) {
+  .placementPage .placementPage__testimonialCard {
+    grid-template-columns: 1fr;
+  }
+
+  .placementPage .placementPage__tLeft {
+    justify-content: flex-start;
+  }
+
+  .placementPage .placementPage__tAvatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 18px;
+  }
+}
+/* Mobile-only side spacing (does NOT affect desktop) */
+@media (max-width: 600px) {
+  .placementPage__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* optional: keep slider cards from sticking to edges */
+  .placementPage__sliderTrack {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+@media (max-width: 980px) {
+  /* tablet + mobile hero spacing also looks better */
+  .placementPage__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+/* =========================================================
+   TESTIMONIAL SLIDER (Premium UI/UX like reference image)
+   Scoped to .placementPage + --testimonial classes only
+   ========================================================= */
+
+.placementPage .placementPage__sliderShell--testimonial {
+  position: relative;
+  margin-top: 18px;
+  border-radius: 26px;
+  overflow: hidden;
+
+  /* soft "panel" look */
+  background:
+    radial-gradient(900px 380px at 18% 15%, rgba(47,111,237,0.10), transparent 55%),
+    radial-gradient(900px 380px at 82% 18%, rgba(124,77,255,0.10), transparent 60%),
+    rgba(255, 255, 255, 0.78);
+
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.10);
+  padding: 22px 0; /* creates air like the mock */
+}
+
+/* Track: center the active slide and allow "peek" of neighbors */
+.placementPage .placementPage__sliderTrack--testimonial {
+  display: flex;
+  gap: 18px;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /* important: padding creates side gap + visible peek */
+  padding: 16px 60px 18px;
+
+  /* makes scrolling feel premium */
+  scroll-padding-left: 60px;
+  scroll-padding-right: 60px;
+}
+
+/* nicer scrollbar (optional) */
+.placementPage .placementPage__sliderTrack--testimonial::-webkit-scrollbar {
+  height: 10px;
+}
+.placementPage .placementPage__sliderTrack--testimonial::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 17, 0.18);
+  border-radius: 999px;
+}
+.placementPage .placementPage__sliderTrack--testimonial::-webkit-scrollbar-track {
+  background: rgba(17, 17, 17, 0.06);
+  border-radius: 999px;
+}
+
+/* Slide/card: horizontal layout like reference (photo left, content right) */
+.placementPage .placementPage__testimonialCard {
+  scroll-snap-align: center;
+  flex: 0 0 min(980px, 86%);
+
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 18px;
+  align-items: center;
+
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
+
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.placementPage .placementPage__testimonialCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.14);
+}
+
+/* left image block */
+.placementPage .placementPage__tLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placementPage .placementPage__tAvatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+
+  border: 3px solid rgba(47, 111, 237, 0.18);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.10);
+}
+
+.placementPage .placementPage__tAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* right header */
+.placementPage .placementPage__tHeader {
+  margin-bottom: 10px;
+}
+
+.placementPage .placementPage__tName {
+  font-weight: 850;
+  font-size: 22px;
+  color: #0f2b5b;
+  letter-spacing: -0.2px;
+  line-height: 1.1;
+}
+
+.placementPage .placementPage__tRole {
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.62);
+}
+
+/* quote bubble like reference */
+.placementPage .placementPage__tBubble {
+  position: relative;
+  border-radius: 18px;
+  padding: 18px 18px;
+
+  background:
+    radial-gradient(700px 260px at 18% 20%, rgba(47, 111, 237, 0.10), transparent 60%),
+    radial-gradient(620px 240px at 86% 18%, rgba(124, 77, 255, 0.08), transparent 62%),
+    rgba(245, 248, 255, 0.92);
+
+  border: 1px solid rgba(47, 111, 237, 0.16);
+}
+
+/* subtle quote mark on bubble */
+.placementPage .placementPage__tBubble::after {
+  content: "”";
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  font-size: 46px;
+  line-height: 1;
+  color: rgba(47, 111, 237, 0.16);
+  font-weight: 800;
+  pointer-events: none;
+}
+
+/* bubble pointer */
+.placementPage .placementPage__tBubble::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 22px;
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  background: rgba(245, 248, 255, 0.92);
+  border-left: 1px solid rgba(47, 111, 237, 0.16);
+  border-top: 1px solid rgba(47, 111, 237, 0.16);
+}
+
+.placementPage .placementPage__tText {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(17, 17, 17, 0.78);
+  max-width: 70ch; /* readability */
+}
+
+/* NAV ARROWS: outside content, centered vertically, no overlap */
+.placementPage .placementPage__sliderShell--testimonial .placementPage__navBtn {
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.12);
+}
+
+.placementPage .placementPage__sliderShell--testimonial .placementPage__navBtn--left {
+  left: 14px;
+}
+.placementPage .placementPage__sliderShell--testimonial .placementPage__navBtn--right {
+  right: 14px;
+}
+
+.placementPage .placementPage__sliderShell--testimonial .placementPage__navBtn:hover {
+  transform: translateY(-50%) translateY(-1px);
+}
+
+/* DOTS: clean + centered like reference */
+.placementPage #testimonials .placementPage__dots {
+  margin-top: 14px;
+  padding-bottom: 6px;
+}
+
+.placementPage #testimonials .placementPage__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.12);
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.placementPage #testimonials .placementPage__dot.isActive {
+  background: rgba(47, 111, 237, 0.90);
+  border-color: rgba(47, 111, 237, 0.95);
+  transform: scale(1.05);
+}
+
+/* -------------------------
+   MOBILE: stacked layout + proper side padding (no edge sticking)
+------------------------- */
+@media (max-width: 640px) {
+  /* ensure container has breathing room */
+  .placementPage .placementPage__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .placementPage .placementPage__sliderShell--testimonial {
+    padding: 14px 0;
+    border-radius: 22px;
+  }
+
+  /* smaller padding so cards stay centered + peek slightly */
+  .placementPage .placementPage__sliderTrack--testimonial {
+    padding: 12px 14px 16px;
+    gap: 14px;
+    scroll-padding-left: 14px;
+    scroll-padding-right: 14px;
+  }
+
+  .placementPage .placementPage__testimonialCard {
+    grid-template-columns: 1fr;
+    flex: 0 0 92%;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .placementPage .placementPage__tLeft {
+    justify-content: flex-start;
+  }
+
+  .placementPage .placementPage__tAvatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 18px;
+  }
+
+  .placementPage .placementPage__tName {
+    font-size: 18px;
+  }
+
+  .placementPage .placementPage__tText {
+    font-size: 15px;
+  }
+
+  /* hide floating arrows on small screens (swipe) */
+  .placementPage .placementPage__sliderShell--testimonial .placementPage__navBtn {
+    display: none;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .placementPage .placementPage__testimonialCard {
+    transition: none !important;
+  }
+  .placementPage .placementPage__dot {
+    transition: none !important;
+  }
+}
+/* =====================================
+   Hide ALL horizontal scrollbars
+   in Placement sliders
+===================================== */
+
+/* Chrome, Edge, Safari */
+.placementPage .placementPage__sliderTrack::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.placementPage .placementPage__sliderTrack {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* IE / old Edge */
+.placementPage .placementPage__sliderTrack {
+  -ms-overflow-style: none;
+}
+/* ==========================
+   Scroll animation (same as About/Courses/Admissions)
+   ========================== */
+
+[data-anim] {
+  --stagger: 0;
+  opacity: 0;
+  transform: translate3d(0, 18px, 0) scale(0.99);
+  filter: blur(10px);
+  transition:
+    opacity 700ms cubic-bezier(.2,.8,.2,1),
+    transform 800ms cubic-bezier(.2,.8,.2,1),
+    filter 800ms cubic-bezier(.2,.8,.2,1);
+  transition-delay: calc(var(--stagger) * 90ms);
+  will-change: transform, opacity, filter;
+}
+
+[data-anim].is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+[data-anim="fade"] { transform: none; }
+
+[data-anim="pop"] {
+  transform: translate3d(0, 10px, 0) scale(0.96);
+}
+
+[data-anim="slideL"] {
+  transform: translate3d(-28px, 0, 0) scale(0.99);
+}
+
+[data-anim="slideR"] {
+  transform: translate3d(28px, 0, 0) scale(0.99);
+}
+
+/* Parallax targets */
+[data-parallax] {
+  --py: 0px;
+  --pr: 0deg;
+  transform: translate3d(0, var(--py), 0) rotate(var(--pr));
+  transition: transform 250ms ease;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-anim] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  [data-parallax] {
+    transform: none !important;
+    transition: none !important;
+  }
+}
